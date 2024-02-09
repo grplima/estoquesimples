@@ -4,10 +4,10 @@ import 'package:flutter/material.dart';
 enum MyItem { itemEdit, itemDelete, itemTap, itemLongPress }
 
 class Item extends StatelessWidget {
-  Item({super.key, required this.pessoa, required this.onMenuClick});
+  Item({super.key, required this.produto, required this.onMenuClick});
 
   late Function(MyItem item) onMenuClick;
-  late Pessoa pessoa;
+  late Produto produto;
 
   _getPopupMenuItem(){
     return PopupMenuButton<MyItem>(
@@ -42,7 +42,7 @@ class Item extends StatelessWidget {
           Row(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              Expanded(child: Text(pessoa.nome, style: TextStyle(fontSize: 30),)),
+              Expanded(child: Text(produto.gtin, style: TextStyle(fontSize: 30),)),
               _getPopupMenuItem()
             ],
           ),
@@ -53,29 +53,9 @@ class Item extends StatelessWidget {
         children: [
           Row(
             children: [
-              Text(pessoa.email)
+              Text(produto.descricao)
             ],
           ),
-          Row(
-            children: [
-              Expanded(child: Text(pessoa.telefone)),
-              Container(
-                width: 60,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  // container arredondado
-                  color: Colors.grey[
-                      400], // com box decoration o container não pode ter color
-                ),
-                child: Center(
-                  child: Text(
-                    pessoa.estadoCivil ? 'Casada' : 'Solteira',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              )
-            ],
-          )
         ],
       ),
       onTap: () {

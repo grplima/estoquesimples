@@ -24,8 +24,8 @@ class _NovoState extends State<Novo> {
   initState(){
     if(widget.produto != null){
       Produto produto = widget.produto!;
-      _gtinController.text = produto.gtin ?? '';
-      _descricaoController.text = produto.descricao ?? '';
+      _gtinController.text = produto.gtin;
+      _descricaoController.text = produto.descricao;
     }
   }
 
@@ -91,7 +91,11 @@ class _NovoState extends State<Novo> {
     // String campoEmail = _emailController.text;
     // bool chaveEstadoCivil = _esdatoCivilController.selected;
 
+    int uniqueProdutoId = DateTime.now().millisecondsSinceEpoch;
+
+
     Produto produto = Produto(
+      produto_id: uniqueProdutoId,
       gtin: campoGtin,
       descricao: campoDescricao,
       // email: campoEmail,

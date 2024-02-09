@@ -1,8 +1,8 @@
 class Produto {
 
-  int? produto_id;
-  late String? gtin;
-  late String? descricao;
+  int produto_id;
+  late String gtin;
+  late String descricao;
 
   Produto(
       {required this.produto_id,

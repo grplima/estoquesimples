@@ -33,29 +33,29 @@ class _HomeState extends State<Home> {
     });
   }
 
-  // _updateLista(){
-  //   _listaProduto.sort((a,b) {
-  //     return a.gtin.toLowerCase().compareTo(b.gtin.toLowerCase());
-  //   });
-  //   setState(() {
-  //     _carregando = false;
-  //   });
-  // }
-
-
   _updateLista(){
-    _listaProduto.sort((a, b) {
-      // Verifica se a.gtin e b.gtin não são nulos antes de chamar toLowerCase()
-      final gtinA = a.gtin?.toLowerCase() ?? '';
-      final gtinB = b.gtin?.toLowerCase() ?? '';
-
-      return gtinA.compareTo(gtinB);
+    _listaProduto.sort((a,b) {
+      return a.gtin.toLowerCase().compareTo(b.gtin.toLowerCase());
     });
-
     setState(() {
       _carregando = false;
     });
   }
+
+  //
+  // _updateLista(){
+  //   _listaProduto.sort((a, b) {
+  //     // Verifica se a.gtin e b.gtin não são nulos antes de chamar toLowerCase()
+  //     final gtinA = a.gtin?.toLowerCase() ?? '';
+  //     final gtinB = b.gtin?.toLowerCase() ?? '';
+  //
+  //     return gtinA.compareTo(gtinB);
+  //   });
+  //
+  //   setState(() {
+  //     _carregando = false;
+  //   });
+  // }
 
 
   _salvar(Produto produto){
@@ -188,7 +188,7 @@ class _HomeState extends State<Home> {
           itemBuilder: (context, index) {
             Produto p = _listaProduto[index];
             return Item(
-              pessoa: p,
+              produto: p,
               onMenuClick: (MyItem item) {
                 switch(item){
                   case MyItem.itemTap:
