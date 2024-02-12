@@ -1,11 +1,7 @@
-import 'package:flutter/material.dart';
 import 'package:estoquesimples/mvc/produto.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 import 'package:estoquesimples/mvc/produtodatabase.dart';
-import 'package:estoquesimples/telas/telainicial.dart';
-
-
+import 'package:flutter/material.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class Cadastronovo extends StatelessWidget {
   Cadastronovo({Key? key}) : super(key: key);
@@ -55,11 +51,17 @@ class Cadastronovo extends StatelessWidget {
                     ),
                   ),
                 ),
-                Container(
-                  child: IconButton(
-                    onPressed: () {},
-                    icon: Icon(Icons.photo_camera),
-                  ),
+                IconButton(
+                  onPressed: () async {
+                    String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                      '#ff6666', 'Cancelar', true, ScanMode.BARCODE,
+                    );
+
+                    if (barcodeScanRes != '-1') {
+                      _controllergtin.text = barcodeScanRes;
+                    }
+                  },
+                  icon: Icon(Icons.photo_camera),
                 )
               ],
             ),
