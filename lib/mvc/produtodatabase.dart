@@ -52,4 +52,23 @@ class ProdutoDatabase {
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }
+
+  Future<void> update(Produto produto) async {
+    final Database db = await _getDatabase();
+    await db.update(
+      _tableName,
+      produto.toMap(),
+      where: '$_id = ?',
+      whereArgs: [produto.id],
+    );
+  }
+
+  Future<void> delete(int productId) async {
+    final Database db = await _getDatabase();
+    await db.delete(
+      _tableName,
+      where: '$_id = ?',
+      whereArgs: [productId],
+    );
+  }
 }

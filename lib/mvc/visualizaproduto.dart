@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:estoquesimples/mvc/produto.dart';
 import 'package:estoquesimples/mvc/produtodatabase.dart';
+import 'package:estoquesimples/mvc/editaproduto.dart';
+import 'package:estoquesimples/mvc/excluirproduto.dart';
 
 class VisualizaProduto extends StatefulWidget {
   @override
@@ -29,7 +31,7 @@ class _VisualizaProdutoState extends State<VisualizaProduto> {
         title: Text(
           "Lista de Produtos",
           style: TextStyle(
-            color: Color(0xFFEDC71F), // Cor #EDC71F
+            color: Color(0xFFEDC71F),
           ),
         ),
         centerTitle: true,
@@ -44,9 +46,56 @@ class _VisualizaProdutoState extends State<VisualizaProduto> {
           return ListTile(
             title: Text(produtos[index].descricao),
             subtitle: Text("GTIN: ${produtos[index].gtin}"),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: Icon(Icons.edit),
+                  onPressed: () {
+                    _exibirTelaEdicao(produtos[index]);
+                  },
+                ),
+                IconButton(
+                  icon: Icon(Icons.delete),
+                  onPressed: () {
+                    _exibirDialogoExclusao(produtos[index]);
+                  },
+                ),
+              ],
+            ),
           );
         },
       ),
+    );
+  }
+
+  void _exibirTelaEdicao(Produto produto) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EditaProduto(
+          produto: produto,
+          onProdutoEditado: () {
+            // Atualizar a lista após a edição
+            _carregarProdutos();
+          },
+        ),
+      ),
+    );
+  }
+
+  void _exibirDialogoExclusao(Produto produto) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return ExcluirProduto(
+          produto: produto,
+          onProdutoExcluido: () {
+            // Atualizar a lista após a exclusão
+            _carregarProdutos();
+          },
+        );
+      },
     );
   }
 }

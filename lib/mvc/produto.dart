@@ -11,6 +11,7 @@ class Produto {
       'gtin': gtin,
       'descricao': descricao,
     };
+
   }
 
   factory Produto.fromMap(Map<String, dynamic> map) {
@@ -18,6 +19,14 @@ class Produto {
       id: map['produto_id'],
       gtin: map['gtin'],
       descricao: map['descricao'],
+    );
+  }
+
+  Produto copyWith({String? gtin, String? descricao}) {
+    return Produto(
+      id: this.id,
+      gtin: gtin ?? this.gtin,
+      descricao: descricao ?? this.descricao,
     );
   }
 }
