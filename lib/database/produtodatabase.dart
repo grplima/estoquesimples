@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:estoquesimples/mvc/produto.dart';
+import 'package:estoquesimples/model/produto.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
-import 'package:estoquesimples/mvc/visualizaproduto.dart';
 
 class ProdutoDatabase {
   static const String _tableName = 'produto';

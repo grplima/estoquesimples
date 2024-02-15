@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:estoquesimples/mvc/produto.dart';
-import 'package:estoquesimples/mvc/produtodatabase.dart';
-import 'package:estoquesimples/mvc/editaproduto.dart';
-import 'package:estoquesimples/mvc/excluirproduto.dart';
+import 'package:estoquesimples/model/produto.dart';
+import 'package:estoquesimples/database/produtodatabase.dart';
+import 'package:estoquesimples/pages/editaproduto.dart';
+import 'package:estoquesimples/pages/excluirproduto.dart';
 
 class VisualizaProduto extends StatefulWidget {
   @override

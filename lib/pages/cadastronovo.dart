@@ -1,13 +1,56 @@
-import 'package:estoquesimples/mvc/produto.dart';
-import 'package:estoquesimples/mvc/produtodatabase.dart';
+import 'dart:convert';
+import 'package:estoquesimples/api/api.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
-class Cadastronovo extends StatelessWidget {
+class Product {
+  final String name;
+  final String barcode;
+  final String? thumbnail; // tornando thumbnail opcional
+
+  Product({
+    required this.name,
+    required this.barcode,
+    this.thumbnail, required String validity, required List<dynamic> otherPhotos, // tornando thumbnail opcional
+  });
+}
+class Cadastronovo extends StatefulWidget {
   Cadastronovo({Key? key}) : super(key: key);
 
+  @override
+  _CadastronovoState createState() => _CadastronovoState();
+}
+
+class _CadastronovoState extends State<Cadastronovo> {
   final _controllergtin = TextEditingController();
   final _controllerdescricao = TextEditingController();
+  String? _produtoDescricao;
+
+  bool _carregando = false;
+  String _message = "";
+
+  _clickBuscar(){
+    String barcode = _controllergtin.text;
+    setState(() {
+      _carregando = true;
+    });
+    Api.consulta(barcode).then((productDto) {
+        print(productDto);
+        _controllerdescricao.text = productDto.name;
+        setState(() {
+          _carregando = false;
+        });
+    }).catchError((e) {
+      try {
+        _message = e.toString().split('Exception: ')[1];
+      } catch (e) {
+        _message = "Falhou";
+      }
+      setState(() {
+        _carregando = false;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -16,21 +59,21 @@ class Cadastronovo extends StatelessWidget {
         title: Text(
           "Cadastro de novo produto",
           style: TextStyle(
-            color: Color(0xFFEDC71F), // Cor #EDC71F
+            color: Color(0xFFEDC71F),
           ),
         ),
-        centerTitle: true, // Centraliza o título
+        centerTitle: true,
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
-            Navigator.pop(context); // Retorna para a tela anterior (TelaInicial)
+            Navigator.pop(context);
           },
         ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center, // Centralizar verticalmente
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               children: [
@@ -59,12 +102,37 @@ class Cadastronovo extends StatelessWidget {
 
                     if (barcodeScanRes != '-1') {
                       _controllergtin.text = barcodeScanRes;
+                      _clickBuscar();
                     }
                   },
                   icon: Icon(Icons.photo_camera),
                 )
               ],
             ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    height: 20,
+                    width: _message.isEmpty ? 20 : null,
+                    child: _carregando ? CircularProgressIndicator() : (_message.isNotEmpty ? Text(_message) : null),
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 14,
+            ),
+            if (_produtoDescricao != null)
+              Text(
+                _produtoDescricao!,
+                style: TextStyle(
+                  fontSize: 18,
+                  color: Colors.black54,
+                ),
+              ),
             SizedBox(
               height: 14,
             ),
@@ -72,6 +140,7 @@ class Cadastronovo extends StatelessWidget {
               children: [
                 Expanded(
                   child: TextField(
+                    enabled: !_carregando,
                     controller: _controllerdescricao,
                     decoration: InputDecoration(
                       labelText: 'Descrição do produto',
@@ -96,39 +165,16 @@ class Cadastronovo extends StatelessWidget {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: () {
-                      // Instanciar ProdutoDatabase para acessar os métodos de banco de dados
-                      final produtoDatabase = ProdutoDatabase();
-
-                      // Obter os valores inseridos pelo usuário
-                      final gtin = _controllergtin.text;
-                      final descricao = _controllerdescricao.text;
-
-                      // Criar um novo Produto
-                      final novoProduto = Produto(gtin: gtin, descricao: descricao);
-
-                      // Chamar o método de inserção do ProdutoDatabase
-                      produtoDatabase.insert(novoProduto);
-
-                      // Limpar os campos de texto após a inserção
-                      _controllergtin.clear();
-                      _controllerdescricao.clear();
-
-                      // Exibir um snackbar informando que o produto foi salvo
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text('Produto salvo com sucesso!'),
-                        ),
-                      );
-                    },
-                    child: Text('Salvar Produto'),
+                    onPressed: _clickBuscar,
+                    child: Text('Buscar Descrição do Produto'),
                   ),
                 )
               ],
-            )
+            ),
           ],
         ),
       ),
     );
   }
 }
+

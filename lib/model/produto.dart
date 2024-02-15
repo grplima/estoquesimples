@@ -3,7 +3,7 @@ class Produto {
   final String gtin;
   final String descricao;
 
-  Produto({this.id, required this.gtin, required this.descricao});
+  Produto({this.id, required this.gtin, required this.descricao, required thumbnail});
 
   Map<String, dynamic> toMap() {
     return {
@@ -18,7 +18,7 @@ class Produto {
     return Produto(
       id: map['produto_id'],
       gtin: map['gtin'],
-      descricao: map['descricao'],
+      descricao: map['descricao'], thumbnail: null,
     );
   }
 
@@ -26,7 +26,7 @@ class Produto {
     return Produto(
       id: this.id,
       gtin: gtin ?? this.gtin,
-      descricao: descricao ?? this.descricao,
+      descricao: descricao ?? this.descricao, thumbnail: null,
     );
   }
 }

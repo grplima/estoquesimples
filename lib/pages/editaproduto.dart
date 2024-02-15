@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:estoquesimples/mvc/produto.dart';
-import 'package:estoquesimples/mvc/produtodatabase.dart';
-import 'package:estoquesimples/mvc/visualizaproduto.dart';
+import 'package:estoquesimples/model/produto.dart';
+import 'package:estoquesimples/database/produtodatabase.dart';
 
 
 class EditaProduto extends StatefulWidget {

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:estoquesimples/mvc/produto.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:estoquesimples/mvc/produtodatabase.dart';
-import 'package:estoquesimples/mvc/cadastronovo.dart';
-import 'package:estoquesimples/mvc/visualizaproduto.dart';
+import 'package:estoquesimples/pages/cadastronovo.dart';
+import 'package:estoquesimples/pages/visualizaproduto.dart';
 
 class TelaInicial extends StatelessWidget {
   @override
