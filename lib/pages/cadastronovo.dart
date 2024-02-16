@@ -93,7 +93,8 @@ class _CadastronovoState extends State<Cadastronovo> {
                       ),
                     ),
                   ),
-                ),
+                ), SizedBox(width:15,),
+                IconButton(onPressed: _clickBuscar, icon: Icon(Icons.search)),
                 IconButton(
                   onPressed: () async {
                     String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
@@ -106,7 +107,7 @@ class _CadastronovoState extends State<Cadastronovo> {
                     }
                   },
                   icon: Icon(Icons.photo_camera),
-                )
+                ),
               ],
             ),
             Row(
@@ -165,8 +166,8 @@ class _CadastronovoState extends State<Cadastronovo> {
               children: [
                 Expanded(
                   child: ElevatedButton(
-                    onPressed: _clickBuscar,
-                    child: Text('Buscar Descrição do Produto'),
+                    onPressed: (){},
+                    child: Text('Salvar'),
                   ),
                 )
               ],
