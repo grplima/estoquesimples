@@ -18,8 +18,8 @@ class TelaInicial extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage('assets/images/Clear_Sans.png'), // Caminho relativo à pasta assets
-            fit: BoxFit.contain,
+            image: AssetImage('assets/images/Clear_Sans2.png'), // Caminho relativo à pasta assets
+            fit: BoxFit.cover,
           ),
         ),
       ),

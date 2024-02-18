@@ -7,16 +7,27 @@ class ProdutoDatabase {
   static const String _id = 'produto_id';
   static const String _gtin = 'gtin';
   static const String _descricao = 'descricao';
+ // static const String _thumbnail = 'thumbnail';
+  static const String _gpcCode = 'gpcCode';
+  static const String _gpcDescription = 'gpcDescription';
+  static const String _fullDescription = 'fullDescription';
+  static const String _ncmDescription = 'ncmDescription';
+  static const String _ncmFullDescription = 'ncmFullDescription';
+  static const String _brand = 'brand';
+  static const String _validity = 'validity';
+ // static const String _otherPhotos = 'otherPhotos';
 
   static const String createTableSQL =
-      'CREATE TABLE $_tableName ($_id INTEGER PRIMARY KEY AUTOINCREMENT, $_gtin TEXT, $_descricao TEXT)';
+      'CREATE TABLE $_tableName ($_id INTEGER PRIMARY KEY AUTOINCREMENT, $_gtin TEXT, $_descricao TEXT, $_gpcCode TEXT, $_gpcDescription TEXT, $_fullDescription TEXT, $_ncmDescription TEXT, $_ncmFullDescription TEXT, $_brand TEXT, $_validity TEXT)';
+
+
 
   Future<Database> _getDatabase() async {
     final String path = join(await getDatabasesPath(), 'Relatorios.db');
     return openDatabase(path, onCreate: (db, version) async {
       await db.execute(createTableSQL);
       await _insertSampleData(db);
-    }, version: 1);
+    }, version: 3);
   }
 
   Future<List<Produto>> getAllProdutos() async {
@@ -36,11 +47,13 @@ class ProdutoDatabase {
 
   Future<void> _insertSampleData(Database db) async {
     await db.execute(
-        "INSERT INTO $_tableName ($_gtin, $_descricao) VALUES ('1234567890123', 'Produto A')");
+        "INSERT INTO $_tableName ($_gtin, $_descricao, $_gpcCode, $_gpcDescription, $_fullDescription, $_ncmDescription, $_ncmFullDescription, $_brand, $_validity) VALUES ('1234567890123', 'Produto A', 'gpcCode_A', 'gpcDescription_A', 'fullDescription_A', 'ncmDescription_A', 'ncmFullDescription_A', 'brand_A', 'validity_A')");
+
     await db.execute(
-        "INSERT INTO $_tableName ($_gtin, $_descricao) VALUES ('9876543210987', 'Produto B')");
-    // Add more insert statements for other sample data
+        "INSERT INTO $_tableName ($_gtin, $_descricao, $_gpcCode, $_gpcDescription, $_fullDescription, $_ncmDescription, $_ncmFullDescription, $_brand, $_validity) VALUES ('9876543210987', 'Produto B', 'gpcCode_B', 'gpcDescription_B', 'fullDescription_B', 'ncmDescription_B', 'ncmFullDescription_B', 'brand_B', 'validity_B')");
+
   }
+
 
   Future<void> insert(Produto produto) async {
     final Database db = await _getDatabase();

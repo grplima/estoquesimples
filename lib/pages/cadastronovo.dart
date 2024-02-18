@@ -1,17 +1,36 @@
 import 'dart:convert';
 import 'package:estoquesimples/api/api.dart';
+import 'package:estoquesimples/api/dto/productdto.dart';
+import 'package:estoquesimples/database/produtodatabase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:estoquesimples/model/produto.dart';
+
 
 class Product {
   final String name;
   final String barcode;
-  final String? thumbnail; // tornando thumbnail opcional
+ // final String? thumbnail; // tornando thumbnail opcional
+  final String gpcCode;
+  final String gpcDescription;
+  final String fullDescription;
+  final String ncmDescription;
+  final String ncmFullDescription;
+  final String brand;
+  final String validity;
 
   Product({
     required this.name,
     required this.barcode,
-    this.thumbnail, required String validity, required List<dynamic> otherPhotos, // tornando thumbnail opcional
+    required this.gpcCode,
+  //  this.thumbnail,
+    required this.gpcDescription,
+    required this.fullDescription,
+    required this.ncmDescription,
+    required this.ncmFullDescription,
+    required this.brand,
+    required this.validity,
+//    required List<dynamic> otherPhotos, // tornando thumbnail opcional
   });
 }
 class Cadastronovo extends StatefulWidget {
@@ -24,33 +43,127 @@ class Cadastronovo extends StatefulWidget {
 class _CadastronovoState extends State<Cadastronovo> {
   final _controllergtin = TextEditingController();
   final _controllerdescricao = TextEditingController();
-  String? _produtoDescricao;
+//  final _controllerthumbnail = TextEditingController();
+  final _controllergpcCode = TextEditingController();
+  final _controllergpcDescription = TextEditingController();
+  final _controllerfullDescription = TextEditingController();
+  final _controllerncmDescription = TextEditingController();
+  final _controllerncmFullDescription = TextEditingController();
+  final _controllerbrand = TextEditingController();
+  final _controllervalidity = TextEditingController();
+//  final _controllerotherPhotos = TextEditingController();
+
+   String? _produtoDescricao;
+  // String? _produtoTumbnail;
+  // String? _produtoGpcDescription;
+  // String? _produtoncmDescription;
+  // String? _produtobrand;
+  // String? _produtovalidity;
 
   bool _carregando = false;
   String _message = "";
 
-  _clickBuscar(){
+  ProdutoDatabase _produtoDatabase = ProdutoDatabase();
+
+  _clickBuscar() {
     String barcode = _controllergtin.text;
     setState(() {
       _carregando = true;
     });
+
     Api.consulta(barcode).then((productDto) {
-        print(productDto);
+      print(productDto); // Verifique o productDto recebido da API
+
+      setState(() {
+        _produtoDescricao = productDto.name; // Atualize _produtoDescricao
         _controllerdescricao.text = productDto.name;
-        setState(() {
-          _carregando = false;
-        });
+
+        //_produtoTumbnail = productDto.thumbnail;
+       // _controllerthumbnail.text = productDto.thumbnail;
+
+        //_produtoGpcDescription = productDto.gpcDescription;
+        _controllergpcDescription.text = productDto.gpcDescription;
+        _controllergpcCode.text = productDto.gpcCode;
+        _controllerfullDescription.text = productDto.fullDescription;
+
+
+        //_produtoncmDescription = productDto.ncmDescription;
+        _controllerncmDescription.text = productDto.ncmDescription;
+        _controllerncmFullDescription.text = productDto.ncmFullDescription;
+
+        //_produtobrand = productDto.brand;
+        _controllerbrand.text = productDto.brand;
+
+        //_produtovalidity = productDto.validity;
+        _controllervalidity.text = productDto.validity;
+
+        _carregando = false;
+
+
+      });
     }).catchError((e) {
       try {
         _message = e.toString().split('Exception: ')[1];
       } catch (e) {
         _message = "Falhou";
       }
+
       setState(() {
         _carregando = false;
       });
     });
   }
+
+
+  _clickSalvar() {
+    String gtin = _controllergtin.text;
+    String descricao = _controllerdescricao.text;
+    //String thumbnail = _controllerthumbnail.text;
+    String gpcCode = _controllergpcCode.text;
+    String gpcDescription = _controllergpcDescription.text;
+    String fullDescription = _controllerfullDescription.text;
+    String ncmDescription = _controllerncmDescription.text;
+    String ncmFullDescription = _controllerncmFullDescription.text;
+    String brand = _controllerbrand.text;
+    String validity = _controllervalidity.text;
+    //String otherPhotos = _controllerotherPhotos.text;
+
+
+    if (gtin.isNotEmpty && descricao.isNotEmpty) {
+      _produtoDatabase.insert(Produto(
+        gtin: gtin,
+        descricao: descricao,
+        //thumbnail: thumbnail,
+        gpcCode: gpcCode,
+        gpcDescription: gpcDescription,
+        fullDescription: fullDescription,
+        ncmDescription: ncmDescription,
+        ncmFullDescription: ncmFullDescription,
+        brand: brand,
+        validity: validity,
+        //otherPhotos: otherPhotos,
+      ));
+
+      // Limpe os campos após salvar
+      _controllergtin.clear();
+      _controllerdescricao.clear();
+      //_controllerthumbnail.clear();
+      _controllergpcCode.clear();
+      _controllergpcDescription.clear();
+      _controllerfullDescription.clear();
+      _controllerncmDescription.clear();
+      _controllerncmFullDescription.clear();
+      _controllerbrand.clear();
+      _controllervalidity.clear();
+      //_controllerotherPhotos.clear();
+
+
+      // Adicione lógica adicional conforme necessário
+    } else {
+      // Adicione lógica de tratamento para campos vazios
+    }
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -72,107 +185,291 @@ class _CadastronovoState extends State<Cadastronovo> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _controllergtin,
-                    decoration: const InputDecoration(
-                      labelText: 'Codigo GTIN',
-                      border: OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black54,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: _controllergtin,
+                      decoration: const InputDecoration(
+                        labelText: 'Codigo GTIN',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
                       ),
                     ),
+                  ), SizedBox(width:15,),
+                  IconButton(onPressed: _clickBuscar, icon: Icon(Icons.search)),
+                  IconButton(
+                    onPressed: () async {
+                      String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+                        '#ff6666', 'Cancelar', true, ScanMode.BARCODE,
+                      );
+          
+                      if (barcodeScanRes != '-1') {
+                        _controllergtin.text = barcodeScanRes;
+                        _clickBuscar();
+                      }
+                    },
+                    icon: Icon(Icons.photo_camera),
                   ),
-                ), SizedBox(width:15,),
-                IconButton(onPressed: _clickBuscar, icon: Icon(Icons.search)),
-                IconButton(
-                  onPressed: () async {
-                    String barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
-                      '#ff6666', 'Cancelar', true, ScanMode.BARCODE,
-                    );
-
-                    if (barcodeScanRes != '-1') {
-                      _controllergtin.text = barcodeScanRes;
-                      _clickBuscar();
-                    }
-                  },
-                  icon: Icon(Icons.photo_camera),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Container(
-                    height: 20,
-                    width: _message.isEmpty ? 20 : null,
-                    child: _carregando ? CircularProgressIndicator() : (_message.isNotEmpty ? Text(_message) : null),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 14,
-            ),
-            if (_produtoDescricao != null)
-              Text(
-                _produtoDescricao!,
-                style: TextStyle(
-                  fontSize: 18,
-                  color: Colors.black54,
-                ),
+                ],
               ),
-            SizedBox(
-              height: 14,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    enabled: !_carregando,
-                    controller: _controllerdescricao,
-                    decoration: InputDecoration(
-                      labelText: 'Descrição do produto',
-                      border: OutlineInputBorder(),
-                      enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
-                      labelStyle: TextStyle(
-                        fontSize: 18,
-                        color: Colors.black54,
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+              Row(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Container(
+                      height: 20,
+                      width: _message.isEmpty ? 20 : null,
+                      child: _carregando ? CircularProgressIndicator() : (_message.isNotEmpty ? Text(_message) : null),
+                    ),
+                  ),
+                ],
+              ),
+              if (_produtoDescricao != null)
+                Text(
+                  _produtoDescricao!,
+                  style: TextStyle(
+                    fontSize: 18,
+                    color: Colors.black54,
+                  ),
+                ),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      enabled: !_carregando,
+                      controller: _controllerdescricao,
+                      decoration: InputDecoration(
+                        labelText: 'Descrição do produto',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 14,
-            ),
-            Row(
-              children: [
-                Expanded(
-                  child: ElevatedButton(
-                    onPressed: (){},
-                    child: Text('Salvar'),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      enabled: !_carregando,
+                      controller: _controllergpcCode,
+                      decoration: InputDecoration(
+                        labelText: 'gpcCode',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
+                      ),
+                    ),
                   ),
-                )
-              ],
-            ),
-          ],
+                ],
+              ),
+          
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: TextField(
+              //         enabled: !_carregando,
+              //         controller: _controllerthumbnail,
+              //         decoration: InputDecoration(
+              //           labelText: 'Thumbnail',
+              //           border: OutlineInputBorder(),
+              //           enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+              //           labelStyle: TextStyle(
+              //             fontSize: 18,
+              //             color: Colors.black54,
+              //           ),
+              //           focusedBorder: OutlineInputBorder(
+              //             borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
+          
+          
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      enabled: !_carregando,
+                      controller: _controllergpcDescription,
+                      decoration: InputDecoration(
+                        labelText: 'gpcDescription',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      enabled: !_carregando,
+                      controller: _controllerfullDescription,
+                      decoration: InputDecoration(
+                        labelText: 'fullDescription',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          
+          
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      enabled: !_carregando,
+                      controller: _controllerncmDescription,
+                      decoration: InputDecoration(
+                        labelText: 'ncmDescription',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      enabled: !_carregando,
+                      controller: _controllerncmFullDescription,
+                      decoration: InputDecoration(
+                        labelText: 'ncmFullDescription',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          
+          
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      enabled: !_carregando,
+                      controller: _controllerbrand,
+                      decoration: InputDecoration(
+                        labelText: 'brand',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          
+          
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      enabled: !_carregando,
+                      controller: _controllervalidity,
+                      decoration: InputDecoration(
+                        labelText: 'validity',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+          
+          
+              SizedBox(
+                height: 14,
+              ),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: _clickSalvar,
+                      child: Text('Salvar'),
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
