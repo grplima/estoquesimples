@@ -3,6 +3,8 @@ import 'package:estoquesimples/model/produto.dart';
 import 'package:estoquesimples/database/produtodatabase.dart';
 import 'package:estoquesimples/pages/editaproduto.dart';
 import 'package:estoquesimples/pages/excluirproduto.dart';
+import 'package:intl/intl.dart';
+
 
 class VisualizaProduto extends StatefulWidget {
   @override
@@ -45,7 +47,13 @@ class _VisualizaProdutoState extends State<VisualizaProduto> {
         itemBuilder: (context, index) {
           return ListTile(
             title: Text(produtos[index].descricao),
-            subtitle: Text("GTIN: ${produtos[index].gtin}"),
+            subtitle: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text("GTIN: ${produtos[index].gtin}"),
+                Text("Dias para vencer: ${produtos[index].diasDeDiferenca()} dias"),
+              ],
+            ),
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

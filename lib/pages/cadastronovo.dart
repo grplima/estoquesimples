@@ -5,6 +5,7 @@ import 'package:estoquesimples/database/produtodatabase.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:estoquesimples/model/produto.dart';
+import 'package:intl/intl.dart';
 
 
 class Product {
@@ -128,6 +129,14 @@ class _CadastronovoState extends State<Cadastronovo> {
     String validity = _controllervalidity.text;
     //String otherPhotos = _controllerotherPhotos.text;
 
+    DateTime validityDateTime;
+
+    try {
+      validityDateTime = DateFormat('dd/MM/yyyy').parse(validity);
+    } catch (e) {
+      print('Erro ao converter a data de validade para DateTime: $e');
+      return;
+    }
 
     if (gtin.isNotEmpty && descricao.isNotEmpty) {
       _produtoDatabase.insert(Produto(
@@ -271,9 +280,32 @@ class _CadastronovoState extends State<Cadastronovo> {
                   Expanded(
                     child: TextField(
                       enabled: !_carregando,
+                      controller: _controllerbrand,
+                      decoration: InputDecoration(
+                        labelText: 'Marca',
+                        border: OutlineInputBorder(),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        labelStyle: TextStyle(
+                          fontSize: 18,
+                          color: Colors.black54,
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+
+              Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      enabled: !_carregando,
                       controller: _controllergpcCode,
                       decoration: InputDecoration(
-                        labelText: 'gpcCode',
+                        labelText: 'Codigo Interno',
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
                         labelStyle: TextStyle(
@@ -320,7 +352,7 @@ class _CadastronovoState extends State<Cadastronovo> {
                       enabled: !_carregando,
                       controller: _controllergpcDescription,
                       decoration: InputDecoration(
-                        labelText: 'gpcDescription',
+                        labelText: 'Categoria',
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
                         labelStyle: TextStyle(
@@ -343,7 +375,7 @@ class _CadastronovoState extends State<Cadastronovo> {
                       enabled: !_carregando,
                       controller: _controllerfullDescription,
                       decoration: InputDecoration(
-                        labelText: 'fullDescription',
+                        labelText: 'Descricao',
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
                         labelStyle: TextStyle(
@@ -367,7 +399,7 @@ class _CadastronovoState extends State<Cadastronovo> {
                       enabled: !_carregando,
                       controller: _controllerncmDescription,
                       decoration: InputDecoration(
-                        labelText: 'ncmDescription',
+                        labelText: 'Tipo',
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
                         labelStyle: TextStyle(
@@ -390,7 +422,7 @@ class _CadastronovoState extends State<Cadastronovo> {
                       enabled: !_carregando,
                       controller: _controllerncmFullDescription,
                       decoration: InputDecoration(
-                        labelText: 'ncmFullDescription',
+                        labelText: 'Descricao NCM',
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
                         labelStyle: TextStyle(
@@ -407,30 +439,9 @@ class _CadastronovoState extends State<Cadastronovo> {
               ),
           
           
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      enabled: !_carregando,
-                      controller: _controllerbrand,
-                      decoration: InputDecoration(
-                        labelText: 'brand',
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
-                        labelStyle: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-          
-          
+
+
+
               Row(
                 children: [
                   Expanded(
@@ -438,7 +449,7 @@ class _CadastronovoState extends State<Cadastronovo> {
                       enabled: !_carregando,
                       controller: _controllervalidity,
                       decoration: InputDecoration(
-                        labelText: 'validity',
+                        labelText: 'Validade',
                         border: OutlineInputBorder(),
                         enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
                         labelStyle: TextStyle(
@@ -449,6 +460,19 @@ class _CadastronovoState extends State<Cadastronovo> {
                           borderSide: BorderSide(color: Colors.blueGrey, width: 2),
                         ),
                       ),
+                      onTap: () async {
+                        DateTime? pickedDate = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime.now(),
+                          lastDate: DateTime(2101),
+                        );
+
+                        if (pickedDate != null && pickedDate != DateTime.now()) {
+                          String formattedDate = DateFormat('dd/MM/yyyy').format(pickedDate);
+                          _controllervalidity.text = formattedDate;
+                        }
+                      },
                     ),
                   ),
                 ],

@@ -41,6 +41,8 @@ dependencies:
   path: ^1.8.3
   flutter_barcode_scanner: ^2.0.0
   http: ^1.2.0
+  intl: ^0.17.0
+  date_format: ^2.0.0
 
 dev_dependencies:
   flutter_test:

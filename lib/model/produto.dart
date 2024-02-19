@@ -1,3 +1,6 @@
+import 'package:intl/intl.dart';
+
+
 class Produto {
   final int? id;
   final String gtin;
@@ -11,6 +14,14 @@ class Produto {
   final String brand;
   String validity; // Validade do produto
 //  final otherPhotos;
+
+  int diasDeDiferenca() {
+    DateTime dataAtual = DateTime.now();
+    DateTime dataValidade = DateFormat('dd/MM/yyyy').parse(validity);
+
+    return dataValidade.difference(dataAtual).inDays;
+  }
+
 
   Produto({this.id,
     required this.gtin,
@@ -39,6 +50,7 @@ class Produto {
       'ncmFullDescription': ncmFullDescription,
       'brand':brand,
       'validity':validity,
+      'diasDeDiferenca': diasDeDiferenca(),
 //     'otherPhotos':otherPhotos
     };
 
