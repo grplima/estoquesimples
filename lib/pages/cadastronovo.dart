@@ -122,9 +122,7 @@ class _CadastronovoState extends State<Cadastronovo> {
 
       });
 
-    }
-
-    if (barcode == "7622300990732") {
+    }else if (barcode == "7622300990732") {
       setState(() {
         _carregando = true;
       });
@@ -174,50 +172,47 @@ class _CadastronovoState extends State<Cadastronovo> {
 
       });
 
+    } else {
+      Api.consulta(barcode).then((productDto) {
+        print(productDto); // Verifique o productDto recebido da API
+
+        setState(() {
+          _produtoDescricao = productDto.name; // Atualize _produtoDescricao
+          _controllerdescricao.text = productDto.name;
+
+          //_produtoTumbnail = productDto.thumbnail;
+          // _controllerthumbnail.text = productDto.thumbnail;
+
+          //_produtoGpcDescription = productDto.gpcDescription;
+          _controllergpcDescription.text = productDto.gpcDescription;
+          _controllergpcCode.text = productDto.gpcCode;
+          _controllerfullDescription.text = productDto.fullDescription;
+
+
+          //_produtoncmDescription = productDto.ncmDescription;
+          _controllerncmDescription.text = productDto.ncmDescription;
+          _controllerncmFullDescription.text = productDto.ncmFullDescription;
+
+          //_produtobrand = productDto.brand;
+          _controllerbrand.text = productDto.brand;
+
+          //_produtovalidity = productDto.validity;
+          _controllervalidity.text = productDto.validity;
+
+          _carregando = false;
+        });
+      }).catchError((e) {
+        try {
+          _message = e.toString().split('Exception: ')[1];
+        } catch (e) {
+          _message = "Falhou";
+        }
+
+        setState(() {
+          _carregando = false;
+        });
+      });
     }
-
-
-    Api.consulta(barcode).then((productDto) {
-      print(productDto); // Verifique o productDto recebido da API
-
-      setState(() {
-        _produtoDescricao = productDto.name; // Atualize _produtoDescricao
-        _controllerdescricao.text = productDto.name;
-
-        //_produtoTumbnail = productDto.thumbnail;
-       // _controllerthumbnail.text = productDto.thumbnail;
-
-        //_produtoGpcDescription = productDto.gpcDescription;
-        _controllergpcDescription.text = productDto.gpcDescription;
-        _controllergpcCode.text = productDto.gpcCode;
-        _controllerfullDescription.text = productDto.fullDescription;
-
-
-        //_produtoncmDescription = productDto.ncmDescription;
-        _controllerncmDescription.text = productDto.ncmDescription;
-        _controllerncmFullDescription.text = productDto.ncmFullDescription;
-
-        //_produtobrand = productDto.brand;
-        _controllerbrand.text = productDto.brand;
-
-        //_produtovalidity = productDto.validity;
-        _controllervalidity.text = productDto.validity;
-
-        _carregando = false;
-
-
-      });
-    }).catchError((e) {
-      try {
-        _message = e.toString().split('Exception: ')[1];
-      } catch (e) {
-        _message = "Falhou";
-      }
-
-      setState(() {
-        _carregando = false;
-      });
-    });
   }
 
 
