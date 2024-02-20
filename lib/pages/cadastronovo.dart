@@ -66,7 +66,7 @@ class _CadastronovoState extends State<Cadastronovo> {
 
   ProdutoDatabase _produtoDatabase = ProdutoDatabase();
 
-  _clickBuscar() {
+  _clickBuscar() async {
     String barcode = _controllergtin.text;
     setState(() {
       _carregando = true;
@@ -77,6 +77,8 @@ class _CadastronovoState extends State<Cadastronovo> {
       setState(() {
         _carregando = true;
       });
+
+      await Future.delayed(Duration(seconds: 1));
 
       // Valores predefinidos
       ProductDto predefinido = ProductDto(
@@ -127,6 +129,8 @@ class _CadastronovoState extends State<Cadastronovo> {
         _carregando = true;
       });
 
+      await Future.delayed(Duration(seconds: 1));
+
       // Valores predefinidos
       ProductDto predefinido = ProductDto(
         name: 'BISC SALG CLUB SOCIAL ORIGINAL 288G',
@@ -163,6 +167,7 @@ class _CadastronovoState extends State<Cadastronovo> {
 
         //_produtovalidity = productDto.validity;
         _controllervalidity.text = predefinido.validity;
+
 
         _carregando = false;
 
