@@ -275,6 +275,10 @@ class _CadastronovoState extends State<Cadastronovo> {
                 ],
               ),
 
+              SizedBox(
+                height: 8,
+              ),
+
               Row(
                 children: [
                   Expanded(
@@ -296,6 +300,10 @@ class _CadastronovoState extends State<Cadastronovo> {
                     ),
                   ),
                 ],
+              ),
+
+              SizedBox(
+                height: 8,
               ),
 
               Row(
@@ -343,7 +351,10 @@ class _CadastronovoState extends State<Cadastronovo> {
               //     ),
               //   ],
               // ),
-          
+
+              SizedBox(
+                height: 8,
+              ),
           
               Row(
                 children: [
@@ -368,6 +379,10 @@ class _CadastronovoState extends State<Cadastronovo> {
                 ],
               ),
 
+              SizedBox(
+                height: 8,
+              ),
+
               Row(
                 children: [
                   Expanded(
@@ -390,8 +405,11 @@ class _CadastronovoState extends State<Cadastronovo> {
                   ),
                 ],
               ),
-          
-          
+
+              SizedBox(
+                height: 8,
+              ),
+
               Row(
                 children: [
                   Expanded(
@@ -413,6 +431,10 @@ class _CadastronovoState extends State<Cadastronovo> {
                     ),
                   ),
                 ],
+              ),
+
+              SizedBox(
+                height: 8,
               ),
 
               Row(
@@ -437,9 +459,11 @@ class _CadastronovoState extends State<Cadastronovo> {
                   ),
                 ],
               ),
-          
-          
 
+
+              SizedBox(
+                height: 8,
+              ),
 
 
               Row(
