@@ -72,6 +72,106 @@ class _CadastronovoState extends State<Cadastronovo> {
       _carregando = true;
     });
 
+    // Verifica se o código de barras é o específico que você está procurando
+    if (barcode == "7891037002449") {
+      setState(() {
+        _carregando = true;
+      });
+
+      // Valores predefinidos
+      ProductDto predefinido = ProductDto(
+        name: 'DESODORANTE.SPRAY REXONA ACTIVE',
+        barcode: '7891037002449',
+        gpcCode: '10000346',
+        gpcDescription: 'Cabelo - Condicionador / tratamento',
+        fullDescription: 'REXONA ACTIVE',
+        ncmDescription: 'Outras',
+        ncmFullDescription: 'Óleos essenciais e resinóides; produtos de perfumaria',
+        brand: 'Rexona',
+        // Você pode modificar esse valor conforme necessário
+        validity: '25/06/2025',
+      );
+
+      setState(() {
+        _produtoDescricao = predefinido.name; // Atualize _produtoDescricao
+        _controllerdescricao.text = predefinido.name;
+
+        //_produtoTumbnail = productDto.thumbnail;
+        // _controllerthumbnail.text = productDto.thumbnail;
+
+        //_produtoGpcDescription = productDto.gpcDescription;
+        _controllergpcDescription.text = predefinido.gpcDescription;
+        _controllergpcCode.text = predefinido.gpcCode;
+        _controllerfullDescription.text = predefinido.fullDescription;
+
+
+        //_produtoncmDescription = productDto.ncmDescription;
+        _controllerncmDescription.text = predefinido.ncmDescription;
+        _controllerncmFullDescription.text = predefinido.ncmFullDescription;
+
+        //_produtobrand = productDto.brand;
+        _controllerbrand.text = predefinido.brand;
+
+        //_produtovalidity = productDto.validity;
+        _controllervalidity.text = predefinido.validity;
+
+        _carregando = false;
+
+
+      });
+
+    }
+
+    if (barcode == "7622300990732") {
+      setState(() {
+        _carregando = true;
+      });
+
+      // Valores predefinidos
+      ProductDto predefinido = ProductDto(
+        name: 'BISC SALG CLUB SOCIAL ORIGINAL 288G',
+        barcode: '7622300990732',
+        gpcCode: '19059020',
+        gpcDescription: 'Bolacha',
+        fullDescription: 'Descrição completa não encontrada',
+        ncmDescription: 'Outras',
+        ncmFullDescription: 'Preparações à base de cereais, farinhas, amidos, féculas ou de leite;',
+        brand: 'Club Social',
+        // Você pode modificar esse valor conforme necessário
+        validity: '25/04/2025',
+      );
+
+      setState(() {
+        _produtoDescricao = predefinido.name; // Atualize _produtoDescricao
+        _controllerdescricao.text = predefinido.name;
+
+        //_produtoTumbnail = productDto.thumbnail;
+        // _controllerthumbnail.text = productDto.thumbnail;
+
+        //_produtoGpcDescription = productDto.gpcDescription;
+        _controllergpcDescription.text = predefinido.gpcDescription;
+        _controllergpcCode.text = predefinido.gpcCode;
+        _controllerfullDescription.text = predefinido.fullDescription;
+
+
+        //_produtoncmDescription = productDto.ncmDescription;
+        _controllerncmDescription.text = predefinido.ncmDescription;
+        _controllerncmFullDescription.text = predefinido.ncmFullDescription;
+
+        //_produtobrand = productDto.brand;
+        _controllerbrand.text = predefinido.brand;
+
+        //_produtovalidity = productDto.validity;
+        _controllervalidity.text = predefinido.validity;
+
+        _carregando = false;
+
+
+      });
+
+    }
+
+
     Api.consulta(barcode).then((productDto) {
       print(productDto); // Verifique o productDto recebido da API
 
