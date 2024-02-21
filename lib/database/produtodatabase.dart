@@ -17,10 +17,11 @@ class ProdutoDatabase {
   static const String _ncmFullDescription = 'ncmFullDescription';
   static const String _brand = 'brand';
   static const String _validity = 'validity';
+  static const String _diasDeDiferenca = 'diasDeDiferenca';
  // static const String _otherPhotos = 'otherPhotos';
 
   static const String createTableSQL =
-      'CREATE TABLE $_tableName ($_id INTEGER PRIMARY KEY AUTOINCREMENT, $_gtin TEXT, $_descricao TEXT, $_gpcCode TEXT, $_gpcDescription TEXT, $_fullDescription TEXT, $_ncmDescription TEXT, $_ncmFullDescription TEXT, $_brand TEXT, $_validity TEXT)';
+      'CREATE TABLE $_tableName ($_id INTEGER PRIMARY KEY AUTOINCREMENT, $_gtin TEXT, $_descricao TEXT, $_gpcCode TEXT, $_gpcDescription TEXT, $_fullDescription TEXT, $_ncmDescription TEXT, $_ncmFullDescription TEXT, $_brand TEXT, $_validity TEXT, $_diasDeDiferenca TEXT)';
 
 
 
@@ -49,10 +50,11 @@ class ProdutoDatabase {
 
   Future<void> _insertSampleData(Database db) async {
     await db.execute(
-        "INSERT INTO $_tableName ($_gtin, $_descricao, $_gpcCode, $_gpcDescription, $_fullDescription, $_ncmDescription, $_ncmFullDescription, $_brand, $_validity) VALUES ('1234567890123', 'Produto A', 'gpcCode_A', 'gpcDescription_A', 'fullDescription_A', 'ncmDescription_A', 'ncmFullDescription_A', 'brand_A', '23/08/2024')");
+        "INSERT INTO $_tableName ($_gtin, $_descricao, $_gpcCode, $_gpcDescription, $_fullDescription, $_ncmDescription, $_ncmFullDescription, $_brand, $_validity, $_diasDeDiferenca) VALUES ('1234567890123', 'Produto A', 'gpcCode_A', 'gpcDescription_A', 'fullDescription_A', 'ncmDescription_A', 'ncmFullDescription_A', 'brand_A', '23/08/2024', '')");
 
-    await db.execute(
-        "INSERT INTO $_tableName ($_gtin, $_descricao, $_gpcCode, $_gpcDescription, $_fullDescription, $_ncmDescription, $_ncmFullDescription, $_brand, $_validity) VALUES ('9876543210987', 'Produto B', 'gpcCode_B', 'gpcDescription_B', 'fullDescription_B', 'ncmDescription_B', 'ncmFullDescription_B', 'brand_B', '23/06/2024')");
+
+        // await db.execute(
+        // "INSERT INTO $_tableName ($_gtin, $_descricao, $_gpcCode, $_gpcDescription, $_fullDescription, $_ncmDescription, $_ncmFullDescription, $_brand, $_validity) VALUES ('9876543210987', 'Produto B', 'gpcCode_B', 'gpcDescription_B', 'fullDescription_B', 'ncmDescription_B', 'ncmFullDescription_B', 'brand_B', '23/06/2024', '')");
 
   }
 
