@@ -6,36 +6,46 @@ class TelaInicial extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFF145DA0),
       appBar: AppBar(
+        backgroundColor: Color(0xFF145DA0),
         title: Text(
-          "Tela Inicial",
-          style: TextStyle(
+          "Início",
+          style: TextStyle(fontSize: 25,
             color: Color(0xFFEDC71F), // Cor #EDC71F
           ),
         ),
         centerTitle: true, // Centraliza o título
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/Clear_Sans2.png'), // Caminho relativo à pasta assets
-            fit: BoxFit.cover,
+      body: Padding(
+        padding: const EdgeInsets.all(20.0),
+        child: Container(
+          decoration: BoxDecoration(
+            image: DecorationImage(
+              image: AssetImage('assets/images/logoVerticalTransp.png'), // Caminho relativo à pasta assets
+              fit: BoxFit.fitWidth,
+            ),
           ),
         ),
       ),
+
       bottomNavigationBar: BottomNavigationBar(
+        selectedLabelStyle: TextStyle(color: Colors.grey),
+        unselectedLabelStyle: TextStyle(color: Colors.grey),
+        unselectedFontSize: 15,
+        selectedFontSize: 15,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+            icon: Icon(Icons.home, size: 40, color: Colors.grey,),
             label: 'Home',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-            label: 'Cadastrar Produto',
+            icon: Icon(Icons.add, size: 40, color: Colors.grey,),
+            label: 'Cadastrar',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Visualizar Produtos',
+            icon: Icon(Icons.list, size: 40, color: Colors.grey,),
+            label: 'Visualizar',
           ),
         ],
         onTap: (index) {
