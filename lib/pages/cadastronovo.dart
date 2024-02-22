@@ -62,6 +62,7 @@ class _CadastronovoState extends State<Cadastronovo> {
   // String? _produtovalidity;
 
   bool _carregando = false;
+  // ignore: unused_field
   String _message = "";
 
   ProdutoDatabase _produtoDatabase = ProdutoDatabase();
@@ -278,6 +279,7 @@ class _CadastronovoState extends State<Cadastronovo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF145DA0),
         title: Text(
           "Cadastro de novo produto",
           style: TextStyle(
@@ -286,32 +288,38 @@ class _CadastronovoState extends State<Cadastronovo> {
         ),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back, color: Color(0xFFEDC71F),),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(12.0),
+        padding: const EdgeInsets.all(14.0),
         child: SingleChildScrollView(
           child: Column(
             children: [
               Row(
                 children: [
+                  SizedBox(height: 5,),
+                ],
+              ),
+              Row(
+                children: [
                   Expanded(
-                    child: TextField(
+                    child:
+                    TextField(
                       controller: _controllergtin,
                       decoration: const InputDecoration(
-                        labelText: 'Codigo GTIN',
+                        labelText: 'Codigo GTIN', filled:true, fillColor: Color(0xFFD8D8D8),
                         border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
                         labelStyle: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                          borderSide: BorderSide(color: Colors.black26, width: 1),
                         ),
                       ),
                     ),
@@ -332,7 +340,7 @@ class _CadastronovoState extends State<Cadastronovo> {
                   ),
                 ],
               ),
-              Row(
+             /* Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -343,6 +351,9 @@ class _CadastronovoState extends State<Cadastronovo> {
                     ),
                   ),
                 ],
+              ),*/
+              SizedBox(
+                height: 15,
               ),
               if (_produtoDescricao != null)
                 Text(
@@ -361,13 +372,13 @@ class _CadastronovoState extends State<Cadastronovo> {
                       decoration: InputDecoration(
                         labelText: 'Descrição do produto',
                         border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
                         labelStyle: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                          borderSide: BorderSide(color: Colors.black26, width: 1),
                         ),
                       ),
                     ),
@@ -388,13 +399,13 @@ class _CadastronovoState extends State<Cadastronovo> {
                       decoration: InputDecoration(
                         labelText: 'Marca',
                         border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
                         labelStyle: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                          borderSide: BorderSide(color: Colors.black26, width: 1),
                         ),
                       ),
                     ),
@@ -415,13 +426,13 @@ class _CadastronovoState extends State<Cadastronovo> {
                       decoration: InputDecoration(
                         labelText: 'Codigo Interno',
                         border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
                         labelStyle: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                          borderSide: BorderSide(color: Colors.black26, width: 1),
                         ),
                       ),
                     ),
@@ -465,13 +476,13 @@ class _CadastronovoState extends State<Cadastronovo> {
                       decoration: InputDecoration(
                         labelText: 'Categoria',
                         border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
                         labelStyle: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                          borderSide: BorderSide(color: Colors.black26, width: 1),
                         ),
                       ),
                     ),
@@ -492,13 +503,13 @@ class _CadastronovoState extends State<Cadastronovo> {
                       decoration: InputDecoration(
                         labelText: 'Descricao',
                         border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
                         labelStyle: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                          borderSide: BorderSide(color: Colors.black26, width: 1),
                         ),
                       ),
                     ),
@@ -519,13 +530,13 @@ class _CadastronovoState extends State<Cadastronovo> {
                       decoration: InputDecoration(
                         labelText: 'Tipo',
                         border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
                         labelStyle: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                          borderSide: BorderSide(color: Colors.black26, width: 1),
                         ),
                       ),
                     ),
@@ -546,13 +557,13 @@ class _CadastronovoState extends State<Cadastronovo> {
                       decoration: InputDecoration(
                         labelText: 'Descricao NCM',
                         border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
                         labelStyle: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                          borderSide: BorderSide(color: Colors.black26, width: 1),
                         ),
                       ),
                     ),
@@ -575,13 +586,13 @@ class _CadastronovoState extends State<Cadastronovo> {
                       decoration: InputDecoration(
                         labelText: 'Validade',
                         border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
                         labelStyle: TextStyle(
                           fontSize: 18,
                           color: Colors.black54,
                         ),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.blueGrey, width: 2),
+                          borderSide: BorderSide(color: Colors.black26, width: 1),
                         ),
                       ),
                       onTap: () async {
@@ -611,7 +622,12 @@ class _CadastronovoState extends State<Cadastronovo> {
                   Expanded(
                     child: ElevatedButton(
                       onPressed: _clickSalvar,
-                      child: Text('Salvar'),
+                      child: Text('Salvar', style: TextStyle(color: Colors.white, fontSize: 20),),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF145DA0),
+                        shape: StadiumBorder(),
+
+                      ),
                     ),
                   )
                 ],
