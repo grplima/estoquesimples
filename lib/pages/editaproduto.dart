@@ -48,6 +48,7 @@ class _EditaProdutoState extends State<EditaProduto> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
+        child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -122,6 +123,7 @@ class _EditaProdutoState extends State<EditaProduto> {
               child: Text("Salvar"),
             ),
           ],
+        ),
         ),
       ),
     );

@@ -227,6 +227,15 @@ class _CadastronovoState extends State<Cadastronovo> {
     }
   }
 
+  void _exibirSnackbar(String mensagem) {
+    final snackBar = SnackBar(
+      content: Text(mensagem),
+      duration: Duration(seconds: 2),
+    );
+
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  }
+
 
   _clickSalvar() {
     String gtin = _controllergtin.text;
@@ -264,6 +273,9 @@ class _CadastronovoState extends State<Cadastronovo> {
         validity: validity,
         //otherPhotos: otherPhotos,
       ));
+
+      _exibirSnackbar("Produto cadastrado com sucesso");
+
 
       // Limpe os campos após salvar
       _controllergtin.clear();
@@ -367,7 +379,7 @@ class _CadastronovoState extends State<Cadastronovo> {
               _productDto!.thumbnail,
               fit: BoxFit.contain, // Ajusta a imagem para caber dentro do container
             )
-                : Center(child: Text('Imagem não disponível')),
+                : Center(child: Text('Imagem')),
           ),
         ),
 
@@ -389,14 +401,7 @@ class _CadastronovoState extends State<Cadastronovo> {
               SizedBox(
                 height: 15,
               ),
-              if (_produtoDescricao != null)
-                Text(
-                  _produtoDescricao!,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.black54,
-                  ),
-                ),
+
               Row(
                 children: [
                   Expanded(
