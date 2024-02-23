@@ -274,7 +274,14 @@ class _CadastronovoState extends State<Cadastronovo> {
         //otherPhotos: otherPhotos,
       ));
 
+
+      setState(() {
+        _productDto?.thumbnail = 'Imagem';});
+
+
       _exibirSnackbar("Produto cadastrado com sucesso");
+
+
 
 
       // Limpe os campos após salvar
@@ -374,7 +381,7 @@ class _CadastronovoState extends State<Cadastronovo> {
           ),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(10),
-            child: _productDto != null
+            child: _productDto != null && _productDto!.thumbnail.isNotEmpty && _productDto!.thumbnail != 'Imagem'
                 ? Image.network(
               _productDto!.thumbnail,
               fit: BoxFit.contain, // Ajusta a imagem para caber dentro do container
