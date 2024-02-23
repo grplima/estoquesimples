@@ -30,6 +30,7 @@ class _VisualizaProdutoState extends State<VisualizaProduto> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Color(0xFF145DA0),
         title: Text(
           "Lista de Produtos",
           style: TextStyle(
@@ -37,6 +38,12 @@ class _VisualizaProdutoState extends State<VisualizaProduto> {
           ),
         ),
         centerTitle: true,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Color(0xFFEDC71F),),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: produtos.isEmpty
           ? Center(

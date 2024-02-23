@@ -45,8 +45,10 @@ class _EditaProdutoState extends State<EditaProduto> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Color(0xFF145DA0),
-        title: Text("Editar Produto", style: TextStyle(color: Color(0xFFEDC71F)),),
-
+        title: Text("Editar Produto",
+          style: TextStyle(color: Color(0xFFEDC71F),
+          ),
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
