@@ -44,7 +44,9 @@ class _EditaProdutoState extends State<EditaProduto> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Editar Produto"),
+        backgroundColor: Color(0xFF145DA0),
+        title: Text("Editar Produto", style: TextStyle(color: Color(0xFFEDC71F)),),
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
@@ -52,75 +54,95 @@ class _EditaProdutoState extends State<EditaProduto> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            SizedBox(height: 8,),
             TextField(
               controller: _controllerGTIN,
               decoration: const InputDecoration(
                 labelText: 'Codigo GTIN',
                 border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
-            SizedBox(height: 14),
+            SizedBox(height: 15),
             TextField(
               controller: _controllerDescricao,
               decoration: const InputDecoration(
                 labelText: 'Descrição do produto',
                 border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
+            SizedBox(height: 15,),
             TextField(
               controller: _controllergpcCode,
               decoration: const InputDecoration(
                 labelText: 'gpcCode',
                 border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
+            SizedBox(height: 15,),
             TextField(
               controller: _controllergpcDescription,
               decoration: const InputDecoration(
                 labelText: 'gpcDescription',
                 border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
+            SizedBox(height: 15,),
             TextField(
               controller: _controllerfullDescription,
               decoration: const InputDecoration(
                 labelText: 'fullDescription',
                 border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
+            SizedBox(height: 15,),
             TextField(
               controller: _controllerncmDescription,
               decoration: const InputDecoration(
                 labelText: 'ncmDescription',
                 border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
+            SizedBox(height: 15,),
             TextField(
               controller: _controllerncmFullDescription,
               decoration: const InputDecoration(
                 labelText: 'ncmFullDescription',
                 border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
+            SizedBox(height: 15,),
             TextField(
               controller: _controllerbrand,
               decoration: const InputDecoration(
                 labelText: 'brand',
                 border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
+            SizedBox(height: 15,),
             TextField(
               controller: _controllervalidity,
               decoration: const InputDecoration(
                 labelText: 'validity',
                 border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
+            SizedBox(height: 15,),
             ElevatedButton(
               onPressed: () {
                 _editarProduto();
               },
-              child: Text("Salvar"),
+              child: Text("Salvar",  style: TextStyle(color: Colors.white, fontSize: 20),),
+              style: ElevatedButton.styleFrom(backgroundColor: Color(0xFF145DA0),
+              shape: StadiumBorder()),
             ),
           ],
         ),
