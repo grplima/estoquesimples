@@ -19,7 +19,7 @@ class Api {
       return ProductDto(
         name: json['description'] ?? 'Descrição não encontrada',
         barcode: barcode,
-       // thumbnail: json['thumbnail'] ?? '',
+        thumbnail: json['thumbnail'] ?? '',
         gpcCode: json['gpc'] != null ? json['gpc']['code'] ?? 'N/A' : 'N/A',
         gpcDescription: json['gpc'] != null ? json['gpc']['description'] ?? 'N/A' : 'N/A',
         fullDescription: json['full_description'] ?? 'Descrição completa não encontrada',

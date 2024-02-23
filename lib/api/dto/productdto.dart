@@ -2,7 +2,7 @@
 class ProductDto {
   final String name;
   final String barcode;
-//  final String thumbnail;
+  final String thumbnail;
   final String gpcCode;
   final String gpcDescription;
   final String fullDescription;
@@ -15,7 +15,7 @@ class ProductDto {
   ProductDto({
     required this.name,
     required this.barcode,
-//    required this.thumbnail,
+    required this.thumbnail,
     required this.gpcCode,
     required this.gpcDescription,
     required this.fullDescription,
@@ -29,7 +29,7 @@ class ProductDto {
   @override
   String toString() {
     return 'ProductDto{name: $name, barcode: $barcode, '
-       // 'thumbnail: $thumbnail, '
+        'thumbnail: $thumbnail, '
         'gpcCode: $gpcCode,'
         ' gpcDescription: $gpcDescription, '
         'fullDescription: $fullDescription, '

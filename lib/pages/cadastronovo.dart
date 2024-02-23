@@ -64,7 +64,7 @@ class _CadastronovoState extends State<Cadastronovo> {
   bool _carregando = false;
   // ignore: unused_field
   String _message = "";
-
+  ProductDto? _productDto;
   ProdutoDatabase _produtoDatabase = ProdutoDatabase();
 
   _clickBuscar() async {
@@ -84,6 +84,7 @@ class _CadastronovoState extends State<Cadastronovo> {
       // Valores predefinidos
       ProductDto predefinido = ProductDto(
         name: 'DESODORANTE.SPRAY REXONA ACTIVE',
+        thumbnail: '',
         barcode: '7891037002449',
         gpcCode: '10000346',
         gpcDescription: 'Cabelo - Condicionador / tratamento',
@@ -93,7 +94,13 @@ class _CadastronovoState extends State<Cadastronovo> {
         brand: 'Rexona',
         // Você pode modificar esse valor conforme necessário
         validity: '25/06/2025',
+
       );
+//-----------------
+      _productDto = predefinido;
+
+//-------------------
+
 
       setState(() {
         _produtoDescricao = predefinido.name; // Atualize _produtoDescricao
@@ -133,6 +140,7 @@ class _CadastronovoState extends State<Cadastronovo> {
       // Valores predefinidos
       ProductDto predefinido = ProductDto(
         name: 'BISC SALG CLUB SOCIAL ORIGINAL 288G',
+        thumbnail: '',
         barcode: '7622300990732',
         gpcCode: '19059020',
         gpcDescription: 'Bolacha',
@@ -143,6 +151,8 @@ class _CadastronovoState extends State<Cadastronovo> {
         // Você pode modificar esse valor conforme necessário
         validity: '25/04/2025',
       );
+
+      _productDto = predefinido;
 
       setState(() {
         _produtoDescricao = predefinido.name; // Atualize _produtoDescricao
@@ -175,6 +185,7 @@ class _CadastronovoState extends State<Cadastronovo> {
 
     } else {
       Api.consulta(barcode).then((productDto) {
+        _productDto = productDto;
         print(productDto); // Verifique o productDto recebido da API
 
         setState(() {
@@ -338,8 +349,31 @@ class _CadastronovoState extends State<Cadastronovo> {
                     },
                     icon: Icon(Icons.photo_camera),
                   ),
+
                 ],
               ),
+             //=====================
+
+        SizedBox(height: 20),
+        Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: Colors.grey),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(10),
+            child: _productDto != null
+                ? Image.network(
+              _productDto!.thumbnail,
+              fit: BoxFit.contain, // Ajusta a imagem para caber dentro do container
+            )
+                : Center(child: Text('Imagem não disponível')),
+          ),
+        ),
+
+              //============================
+
+
              Row(
                 children: [
                   Padding(
