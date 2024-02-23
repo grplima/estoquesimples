@@ -252,6 +252,11 @@ class _CadastronovoState extends State<Cadastronovo> {
 
     DateTime validityDateTime;
 
+    if (validity.isEmpty) {
+      _exibirSnackbar("Por favor, preencha a data de validade.");
+      return; // Sai da função se a validade não estiver preenchida
+    }
+
     try {
       validityDateTime = DateFormat('dd/MM/yyyy').parse(validity);
     } catch (e) {
@@ -277,6 +282,7 @@ class _CadastronovoState extends State<Cadastronovo> {
 
       setState(() {
         _productDto?.thumbnail = 'Imagem';});
+
 
 
       _exibirSnackbar("Produto cadastrado com sucesso");
