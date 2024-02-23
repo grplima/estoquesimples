@@ -2,7 +2,7 @@
 class ProductDto {
   final String name;
   final String barcode;
-  final String thumbnail;
+  String thumbnail;
   final String gpcCode;
   final String gpcDescription;
   final String fullDescription;
