@@ -340,7 +340,7 @@ class _CadastronovoState extends State<Cadastronovo> {
                   ),
                 ],
               ),
-             /* Row(
+             Row(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -351,7 +351,7 @@ class _CadastronovoState extends State<Cadastronovo> {
                     ),
                   ),
                 ],
-              ),*/
+              ),
               SizedBox(
                 height: 15,
               ),
