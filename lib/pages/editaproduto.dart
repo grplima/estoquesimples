@@ -78,7 +78,7 @@ class _EditaProdutoState extends State<EditaProduto> {
             TextField(
               controller: _controllergpcCode,
               decoration: const InputDecoration(
-                labelText: 'gpcCode',
+                labelText: 'Codigo Interno',
                 border: OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
@@ -87,25 +87,25 @@ class _EditaProdutoState extends State<EditaProduto> {
             TextField(
               controller: _controllergpcDescription,
               decoration: const InputDecoration(
-                labelText: 'gpcDescription',
+                labelText: 'Categoria',
                 border: OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
             ),
-            SizedBox(height: 15,),
-            TextField(
-              controller: _controllerfullDescription,
-              decoration: const InputDecoration(
-                labelText: 'fullDescription',
-                border: OutlineInputBorder(),
-                enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
-              ),
-            ),
+            // SizedBox(height: 15,),
+            // TextField(
+            //   controller: _controllerfullDescription,
+            //   decoration: const InputDecoration(
+            //     labelText: 'fullDescription',
+            //     border: OutlineInputBorder(),
+            //     enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
+            //   ),
+            // ),
             SizedBox(height: 15,),
             TextField(
               controller: _controllerncmDescription,
               decoration: const InputDecoration(
-                labelText: 'ncmDescription',
+                labelText: 'Tipo',
                 border: OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
@@ -114,7 +114,7 @@ class _EditaProdutoState extends State<EditaProduto> {
             TextField(
               controller: _controllerncmFullDescription,
               decoration: const InputDecoration(
-                labelText: 'ncmFullDescription',
+                labelText: 'Descrição NCM',
                 border: OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
@@ -123,7 +123,7 @@ class _EditaProdutoState extends State<EditaProduto> {
             TextField(
               controller: _controllerbrand,
               decoration: const InputDecoration(
-                labelText: 'brand',
+                labelText: 'Marca',
                 border: OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
@@ -132,7 +132,7 @@ class _EditaProdutoState extends State<EditaProduto> {
             TextField(
               controller: _controllervalidity,
               decoration: const InputDecoration(
-                labelText: 'validity',
+                labelText: 'Validade',
                 border: OutlineInputBorder(),
                 enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
               ),
