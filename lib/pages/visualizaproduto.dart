@@ -5,6 +5,8 @@ import 'package:estoquesimples/pages/editaproduto.dart';
 import 'package:estoquesimples/pages/excluirproduto.dart';
 import 'package:intl/intl.dart';
 
+import 'detalhesproduto.dart';
+
 
 class VisualizaProduto extends StatefulWidget {
   @override
@@ -24,6 +26,15 @@ class _VisualizaProdutoState extends State<VisualizaProduto> {
   Future<void> _carregarProdutos() async {
     produtos = await produtoDatabase.getAllProdutos();
     setState(() {});
+  }
+
+  void _exibirDetalhesProduto(Produto produto) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => DetalhesProduto(produto: produto),
+      ),
+    );
   }
 
   @override
@@ -61,6 +72,11 @@ class _VisualizaProdutoState extends State<VisualizaProduto> {
                 Text("Dias para vencer: ${produtos[index].diasDeDiferenca()} dias"),
               ],
             ),
+
+            onTap: () {
+              _exibirDetalhesProduto(produtos[index]);
+            },
+
             trailing: Row(
               mainAxisSize: MainAxisSize.min,
               children: [

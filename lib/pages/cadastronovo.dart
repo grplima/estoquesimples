@@ -546,28 +546,28 @@ class _CadastronovoState extends State<Cadastronovo> {
                 height: 8,
               ),
 
-              Row(
-                children: [
-                  Expanded(
-                    child: TextField(
-                      enabled: !_carregando,
-                      controller: _controllerfullDescription,
-                      decoration: InputDecoration(
-                        labelText: 'Descricao',
-                        border: OutlineInputBorder(),
-                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
-                        labelStyle: TextStyle(
-                          fontSize: 18,
-                          color: Colors.black54,
-                        ),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.black26, width: 1),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // Row(
+              //   children: [
+              //     Expanded(
+              //       child: TextField(
+              //         enabled: !_carregando,
+              //         controller: _controllerfullDescription,
+              //         decoration: InputDecoration(
+              //           labelText: 'Descricao',
+              //           border: OutlineInputBorder(),
+              //           enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: Colors.black26)),
+              //           labelStyle: TextStyle(
+              //             fontSize: 18,
+              //             color: Colors.black54,
+              //           ),
+              //           focusedBorder: OutlineInputBorder(
+              //             borderSide: BorderSide(color: Colors.black26, width: 1),
+              //           ),
+              //         ),
+              //       ),
+              //     ),
+              //   ],
+              // ),
 
               SizedBox(
                 height: 8,
