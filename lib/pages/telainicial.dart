@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:estoquesimples/pages/cadastronovo.dart';
 import 'package:estoquesimples/pages/visualizaproduto.dart';
+import 'package:estoquesimples/pages/sobrenos.dart';
 
 class TelaInicial extends StatelessWidget {
   @override
@@ -47,6 +48,10 @@ class TelaInicial extends StatelessWidget {
             icon: Icon(Icons.list, size: 40, color: Colors.grey,),
             label: 'Visualizar',
           ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.people, size: 40, color: Colors.grey,),
+            label: 'Sobre nós',
+          ),
         ],
         onTap: (index) {
           if (index == 0) {
@@ -60,6 +65,11 @@ class TelaInicial extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => VisualizaProduto()),
+            );
+          }else if (index == 3){
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => SobreNosPage()),
             );
           }
         },
