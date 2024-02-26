@@ -69,8 +69,17 @@ class _VisualizaProdutoState extends State<VisualizaProduto> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("GTIN: ${produtos[index].gtin}"),
-                Text("Dias para vencer: ${produtos[index].diasDeDiferenca()} dias",
-                  style: TextStyle(fontSize: 18.0)
+                SizedBox(height: 8.0),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black), // Adiciona uma borda apenas para este Container
+                    borderRadius: BorderRadius.all(Radius.circular(8.0)), // Opcional: Adiciona bordas arredondadas
+                  ),
+                  padding: EdgeInsets.all(8.0), // Adiciona espaçamento interno
+                  child: Text(
+                    "Dias para vencer: ${produtos[index].diasDeDiferenca()} dias",
+                    style: TextStyle(fontSize: 18.0),
+                  ),
                 ),
               ],
             ),
