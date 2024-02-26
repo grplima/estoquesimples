@@ -64,21 +64,21 @@ class SobreNosPage extends StatelessWidget {
         ),
 
         body: Container(
-        color: Color(0xFF145DA0),
-        child: ListView(
-          children: [
-            Image.asset(
-              'assets/images/logohorizontal1.png',
-              fit: BoxFit.fitWidth,
-            ),
-            Column(
-              children: teamMembers
-                  .map((member) => MemberTile(member: member))
-                  .toList(),
-            ),
-          ],
+          color: Color(0xFF145DA0),
+          child: ListView(
+            children: [
+              Image.asset(
+                'assets/images/logohorizontal1.png',
+                fit: BoxFit.fitWidth,
+              ),
+              Column(
+                children: teamMembers
+                    .map((member) => MemberTile(member: member))
+                    .toList(),
+              ),
+            ],
+          ),
         ),
-      ),
       ),
     );
   }
@@ -164,10 +164,10 @@ class MemberDetailsScreen extends StatelessWidget {
   }
 
   _launchURL(String url) async {
-    if (await canLaunchUrl(url as Uri)) {
-      await launchUrl(url as Uri);
-    } else {
-      throw 'Could not launch $url';
-    }
+    await launchUrl(Uri.parse(url));
   }
+}
+
+void main() {
+  runApp(SobreNosPage());
 }
