@@ -37,7 +37,7 @@ class TelaInicial extends StatelessWidget {
         selectedLabelStyle: const TextStyle(color: Colors.grey),
         unselectedLabelStyle: const TextStyle(color: Colors.grey),
         unselectedFontSize: 15,
-        selectedFontSize: 10,
+        selectedFontSize: 15,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home, size: 40, color: Colors.grey,),
