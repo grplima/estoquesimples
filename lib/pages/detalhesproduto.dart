@@ -27,6 +27,7 @@ class DetalhesProduto extends StatelessWidget {
       ),
       body: Padding(
         padding: const EdgeInsets.all(12.0),
+        child: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -61,6 +62,7 @@ class DetalhesProduto extends StatelessWidget {
             // Adicione mais informações conforme necessário
           ],
         ),
+      ),
       ),
     );
   }

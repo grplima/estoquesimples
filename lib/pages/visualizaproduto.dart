@@ -69,7 +69,9 @@ class _VisualizaProdutoState extends State<VisualizaProduto> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text("GTIN: ${produtos[index].gtin}"),
-                Text("Dias para vencer: ${produtos[index].diasDeDiferenca()} dias"),
+                Text("Dias para vencer: ${produtos[index].diasDeDiferenca()} dias",
+                  style: TextStyle(fontSize: 18.0)
+                ),
               ],
             ),
 
