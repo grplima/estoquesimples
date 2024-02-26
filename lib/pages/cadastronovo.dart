@@ -569,9 +569,7 @@ class _CadastronovoState extends State<Cadastronovo> {
               //   ],
               // ),
 
-              SizedBox(
-                height: 8,
-              ),
+
 
               Row(
                 children: [

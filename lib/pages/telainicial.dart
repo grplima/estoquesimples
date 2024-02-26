@@ -4,6 +4,8 @@ import 'package:estoquesimples/pages/visualizaproduto.dart';
 import 'package:estoquesimples/pages/sobrenos.dart';
 
 class TelaInicial extends StatelessWidget {
+  const TelaInicial({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -16,7 +18,8 @@ class TelaInicial extends StatelessWidget {
             color: Color(0xFFEDC71F), // Cor #EDC71F
           ),
         ),
-        centerTitle: true, // Centraliza o título
+        centerTitle: true,
+
       ),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -35,7 +38,7 @@ class TelaInicial extends StatelessWidget {
         unselectedLabelStyle: TextStyle(color: Colors.grey),
         unselectedFontSize: 15,
         selectedFontSize: 15,
-        items: [
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home, size: 40, color: Colors.grey,),
             label: 'Home',
@@ -48,10 +51,7 @@ class TelaInicial extends StatelessWidget {
             icon: Icon(Icons.list, size: 40, color: Colors.grey,),
             label: 'Visualizar',
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people, size: 40, color: Colors.grey,),
-            label: 'Sobre nós',
-          ),
+
         ],
         onTap: (index) {
           if (index == 0) {
